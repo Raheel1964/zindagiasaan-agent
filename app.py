@@ -1,5 +1,5 @@
 # THE "REAL-TIME" INSTRUCTION
-        prompt = f"""
+        f"""
         Act as the Zindagiasaan Lead Strategist. 
         TOOLS: You have access to the knowledge from:
         - TIPP Procedure ID 305 (https://tipp.gov.pk/index.php?r=site/display&id=305)
