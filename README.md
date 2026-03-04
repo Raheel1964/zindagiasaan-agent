@@ -1,3 +1,4 @@
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://www.zindagiasaan.pk/agent)
 # 🌾 Zindagiasaan: Agri-Trade Intelligence Agent
 
 > **Bridging the gap between Pakistani Horticulture and Global Markets.**
