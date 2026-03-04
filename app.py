@@ -24,16 +24,23 @@ if api_key:
     if st.button("🚀 Generate Strategy"):
         with st.spinner("Analyzing TIPP ID 305 & ITC Data..."):
             # The Prompt - Ensure no extra spaces at the start of these lines
-            prompt = f"""
-Act as the Zindagiasaan Lead Strategist. 
-Analyze {prod} (HS Chapter 07/08/20).
-Growth Stats: ${v22}k in 2022 to ${v26}k in 2026.
+           # ENHANCED 2026 RESEARCH LOGIC
+        prompt = f"""
+Act as the Zindagiasaan Lead Trade Strategist. 
+MISSION: Help Pakistani exporters navigate the 2026 horticulture market.
+
+RESOURCES:
+- TIPP ID 305: Mandatory procedures for fresh vegetables/fruits.
+- ITC Export Potential: Identifying 'unrealized' potential in Europe/Middle East.
+- GSP+: 0% Duty benefit vs Competitors (India, Egypt).
+
+INPUT: {prod} exports growing from ${v22}k to ${v26}k.
 
 TASK:
-1. Reference TIPP Procedure ID 305 for mandatory certificates (DPP/PSW).
-2. Use ITC logic to identify 'Untapped Potential' in the EU market.
-3. Pitch the ROI of Chapter 20 (Freeze-Drying) to reduce post-harvest waste.
-4. Provide English analysis first, then '---', then a professional Urdu report.
+1. COMPLIANCE: Specifically mention the DPP (Department of Plant Protection) and PSW (Pakistan Single Window) requirements from TIPP 305.
+2. MARKET TREND: Reference the 2026 surge in demand from Kuwait and Singapore.
+3. VALUE ADD: Calculate the 'Waste-to-Wealth' ROI of moving from Fresh to Freeze-Dried (Ch 20).
+4. Provide a detailed English strategic analysis, then '---', then a professional Urdu translation for rural farmers.
 """
             try:
                 response = model.generate_content(prompt)
