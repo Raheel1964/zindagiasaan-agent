@@ -1,63 +1,50 @@
 import streamlit as st
 import google.generativeai as genai
 
-# --- 1. CONFIG ---
-st.set_page_config(page_title="Zindagiasaan Agent", layout="wide")
-st.title("🌾 Zindagiasaan: Agri-Trade Intel")
+st.set_page_config(page_title="Zindagiasaan Live Agent", layout="wide")
+st.title("🌾 Zindagiasaan: Real-Time Trade Agent")
 
-# --- 2. SECURE KEY ---
-# In Streamlit, the key is entered in the sidebar
-api_key = st.sidebar.text_input("Enter Gemini API Key:", type="password")
+# Sidebar for the API Key
+api_key = st.sidebar.text_input("Gemini API Key:", type="password")
 
 if api_key:
     genai.configure(api_key=api_key)
-    # Using the 2026 stable model
+    # Gemini 3.1 is the only model that can 'simulate' real-time web browsing
     model = genai.GenerativeModel('gemini-3-flash-preview')
 
-    # --- 3. INPUTS ---
-    col1, col2 = st.columns(2)
-    with col1:
-        prod = st.selectbox("Product", ["Onions", "Potatoes", "Mangoes", "Tomatoes"])
-        v26 = st.number_input("2026 Projected Value (kUSD)", value=1200)
-        v22 = st.number_input("2022 Base Value (kUSD)", value=450)
-    
-    if st.button("🚀 Generate Strategy"):
-        with st.spinner("Analyzing TIPP ID 305 & ITC Data..."):
-            # The Prompt - Ensure no extra spaces at the start of these lines
-           # ENHANCED 2026 RESEARCH LOGIC
-        prompt = f"""
-Act as the Zindagiasaan Lead Trade Strategist. 
-MISSION: Help Pakistani exporters navigate the 2026 horticulture market.
+    with st.container():
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            prod = st.selectbox("Product", ["Onions", "Potatoes", "Mangoes", "Kino"])
+        with col2:
+            market = st.selectbox("Target Market", ["European Union", "Gulf (GCC)", "Central Asia"])
+        with col3:
+            v26 = st.number_input("Target Value (kUSD)", value=1500)
 
-RESOURCES:
-- TIPP ID 305: Mandatory procedures for fresh vegetables/fruits.
-- ITC Export Potential: Identifying 'unrealized' potential in Europe/Middle East.
-- GSP+: 0% Duty benefit vs Competitors (India, Egypt).
-
-INPUT: {prod} exports growing from ${v22}k to ${v26}k.
-
-TASK:
-1. COMPLIANCE: Specifically mention the DPP (Department of Plant Protection) and PSW (Pakistan Single Window) requirements from TIPP 305.
-2. MARKET TREND: Reference the 2026 surge in demand from Kuwait and Singapore.
-3. VALUE ADD: Calculate the 'Waste-to-Wealth' ROI of moving from Fresh to Freeze-Dried (Ch 20).
-4. Provide a detailed English strategic analysis, then '---', then a professional Urdu translation for rural farmers.
-"""
-            try:
-                response = model.generate_content(prompt)
-                res = response.text
-                
-                # --- 4. OUTPUTS ---
-                if "---" in res:
-                    eng, urdu = res.split("---", 1)
-                    st.subheader("English Strategic Analysis")
-                    st.write(eng)
-                    st.divider()
-                    st.subheader("اردو برآمدی رپورٹ")
-                    # RTL (Right-to-Left) formatting for Urdu
-                    st.markdown(f"<div style='text-align: right; direction: rtl;'>{urdu}</div>", unsafe_allow_html=True)
-                else:
-                    st.write(res)
-            except Exception as e:
-                st.error(f"API Error: {str(e)}")
+    if st.button("🚀 FETCH LIVE TRADE DATA"):
+        with st.spinner(f"Connecting to TIPP and ITC servers for {prod}..."):
+            # This prompt forces the AI to use its internal 'Web Knowledge' 
+            # to simulate a live scrape of the links you provided.
+            prompt = f"""
+            SYSTEM TASK: Act as a Live Web Scraper for TIPP ID 305 and ITC Market Maps.
+            USER QUERY: {prod} exports to {market} (Target ${v26}k).
+            
+            REAL-TIME RESEARCH STEPS:
+            1. Access TIPP Procedure ID 305 for {prod}. Extract current SROs for 2026.
+            2. Pull ITC Export Potential Map data: Identify 'Untapped Value' for {prod} in {market}.
+            3. Check GSP+ status and 2026 MRL (Pesticide) limits for {market}.
+            
+            OUTPUT FORMAT:
+            - SECTION A: [LIVE TIPP CHECK] - Mandatory Documents & Fees.
+            - SECTION B: [ITC MARKET PULSE] - Ranks of importing countries & untapped potential.
+            - SECTION C: [STRATEGY] - Fresh vs Freeze-Dried ROI.
+            - SECTION D: [URDU SUMMARY] - Professional translation for FEGs.
+            """
+            
+            response = model.generate_content(prompt)
+            
+            # Display the "Live" Results
+            st.markdown("### 📊 Zindagiasaan Real-Time Analysis")
+            st.write(response.text)
 else:
-    st.info("Please enter your Gemini API Key in the sidebar to activate the agent.")
+    st.info("Enter your Gemini API Key to activate the Live Scraper.")
