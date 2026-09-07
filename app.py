@@ -1,7 +1,9 @@
 import streamlit as st
 import pandas as pd
 
+# ==========================================
 # 1. MUST BE THE VERY FIRST STREAMLIT COMMAND
+# ==========================================
 st.set_page_config(
     page_title="AgriAsaan | AI Global Trade Engine",
     page_icon="🌾",
@@ -9,7 +11,9 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# 2. CUSTOM CSS STYLING
+# ==========================================
+# 2. STYLING & CUSTOM CSS (MUST COME AFTER CONFIG)
+# ==========================================
 st.markdown("""
     <style>
     .stAppHeader {background-color: rgba(255, 255, 255, 0.0);}
@@ -22,7 +26,9 @@ st.markdown("""
     </style>
 """, unsafe_html=True)
 
+# ==========================================
 # 3. SIDEBAR NAVIGATION
+# ==========================================
 st.sidebar.markdown("### 🌾 **AgriAsaan Platform**")
 st.sidebar.caption("Powered by ITC Trade Map & TIPP Data")
 st.sidebar.divider()
@@ -32,7 +38,9 @@ selected_page = st.sidebar.radio(
     ["📊 Executive Dashboard", "🌐 ITC & TIPP Trade Engine", "🤖 ZindagiAsaan AI Agent"]
 )
 
-# 4. PAGE ROUTING LOGIC
+# ==========================================
+# 4. PAGE ROUTING
+# ==========================================
 
 # --- PAGE 1: EXECUTIVE DASHBOARD ---
 if selected_page == "📊 Executive Dashboard":
