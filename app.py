@@ -1,9 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-# ==========================================
 # 1. MUST BE THE VERY FIRST STREAMLIT COMMAND
-# ==========================================
 st.set_page_config(
     page_title="AgriAsaan | AI Global Trade Engine",
     page_icon="🌾",
@@ -11,25 +9,8 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ==========================================
-# 2. STYLING & CUSTOM CSS (MUST COME AFTER CONFIG)
-# ==========================================
-st.markdown("""
-    <style>
-    .stAppHeader {background-color: rgba(255, 255, 255, 0.0);}
-    .main-header {
-        font-size: 26px; font-weight: 700; color: #2E7D32; margin-bottom: 0px;
-    }
-    .sub-header {
-        font-size: 14px; color: #555555; margin-bottom: 20px;
-    }
-    </style>
-""", unsafe_html=True)
-
-# ==========================================
-# 3. SIDEBAR NAVIGATION
-# ==========================================
-st.sidebar.markdown("### 🌾 **AgriAsaan Platform**")
+# 2. SIDEBAR NAVIGATION (NO HTML/CSS INJECTION)
+st.sidebar.title("🌾 AgriAsaan Platform")
 st.sidebar.caption("Powered by ITC Trade Map & TIPP Data")
 st.sidebar.divider()
 
@@ -38,14 +19,12 @@ selected_page = st.sidebar.radio(
     ["📊 Executive Dashboard", "🌐 ITC & TIPP Trade Engine", "🤖 ZindagiAsaan AI Agent"]
 )
 
-# ==========================================
-# 4. PAGE ROUTING
-# ==========================================
+# 3. PAGE ROUTING
 
 # --- PAGE 1: EXECUTIVE DASHBOARD ---
 if selected_page == "📊 Executive Dashboard":
-    st.markdown("<div class='main-header'>AgriAsaan Trade Intelligence Hub</div>", unsafe_html=True)
-    st.markdown("<div class='sub-header'>Real-time export suitability, tariff analysis, and compliance automation for Pakistani Agriculture</div>", unsafe_html=True)
+    st.title("AgriAsaan Trade Intelligence Hub")
+    st.caption("Real-time export suitability, tariff analysis, and compliance automation for Pakistani Agriculture")
 
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Export Markets Tracked", "120+", delta="Live Data")
@@ -68,7 +47,7 @@ if selected_page == "📊 Executive Dashboard":
 
 # --- PAGE 2: TRADE ENGINE ---
 elif selected_page == "🌐 ITC & TIPP Trade Engine":
-    st.markdown("<div class='main-header'>🌐 ITC & TIPP Trade Intelligence Engine</div>", unsafe_html=True)
+    st.title("🌐 ITC & TIPP Trade Intelligence Engine")
     st.caption("Verify real-time export demand, SPS/TBT compliance rules, and preferential tariffs.")
 
     col1, col2 = st.columns(2)
@@ -105,7 +84,7 @@ elif selected_page == "🌐 ITC & TIPP Trade Engine":
 
 # --- PAGE 3: AI COPILOT ---
 elif selected_page == "🤖 ZindagiAsaan AI Agent":
-    st.markdown("<div class='main-header'>🤖 ZindagiAsaan AI Copilot</div>", unsafe_html=True)
+    st.title("🤖 ZindagiAsaan AI Copilot")
     st.caption("Multilingual AI Assistant for Pakistani Agri-Exporters and Farmers")
 
     if "messages" not in st.session_state:
