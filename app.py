@@ -1,5 +1,6 @@
 import streamlit as st
 
+# 1. ALWAYS CALL THIS FIRST!
 st.set_page_config(
     page_title="AgriAsaan | AI Global Trade Engine",
     page_icon="🌾",
@@ -7,7 +8,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom Styling Injection
+# 2. NOW YOU CAN CALL st.markdown() OR OTHER STREAMLIT COMMANDS
 st.markdown("""
     <style>
     .stAppHeader {background-color: rgba(255, 255, 255, 0.0);}
