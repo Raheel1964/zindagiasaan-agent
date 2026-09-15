@@ -1,7 +1,5 @@
 import streamlit as st
-import pandas as pd
 
-# 1. MUST BE THE VERY FIRST STREAMLIT COMMAND
 st.set_page_config(
     page_title="AgriAsaan | AI Global Trade Engine",
     page_icon="🌾",
@@ -9,15 +7,28 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# 2. SIDEBAR NAVIGATION (NO HTML/CSS INJECTION)
 st.sidebar.title("🌾 AgriAsaan Platform")
 st.sidebar.caption("Powered by ITC Trade Map & TIPP Data")
 st.sidebar.divider()
 
 selected_page = st.sidebar.radio(
     "Navigation Menu",
-    ["📊 Executive Dashboard", "🌐 ITC & TIPP Trade Engine", "🤖 ZindagiAsaan AI Agent"]
+    [
+        "📊 Executive Dashboard",
+        "🌐 ITC & TIPP Trade Engine",
+        "💰 Export Margin Calculator",
+        "🤖 ZindagiAsaan AI Agent"
+    ]
 )
+
+if selected_page == "📊 Executive Dashboard":
+    exec(open("views/overview.py").read())
+elif selected_page == "🌐 ITC & TIPP Trade Engine":
+    exec(open("views/trade_intelligence.py").read())
+elif selected_page == "💰 Export Margin Calculator":
+    exec(open("views/margin_calculator.py").read())
+elif selected_page == "🤖 ZindagiAsaan AI Agent":
+    exec(open("views/copilot.py").read())
 
 # 3. PAGE ROUTING
 
