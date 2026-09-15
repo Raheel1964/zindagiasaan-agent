@@ -1,6 +1,6 @@
 import streamlit as st
 
-# 1. MUST BE THE VERY FIRST STREAMLIT COMMAND IN THE ENTIRE APP
+# 1. ALWAYS FIRST
 st.set_page_config(
     page_title="AgriAsaan | AI Global Trade Engine",
     page_icon="🌾",
@@ -23,7 +23,7 @@ selected_page = st.sidebar.radio(
     ]
 )
 
-# 3. ROUTE TO PAGE FUNCTIONS
+# 3. PAGE ROUTING
 if selected_page == "📊 Executive Dashboard":
     from views import overview
     overview.show()
