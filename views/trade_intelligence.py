@@ -7,7 +7,7 @@ def show():
 
     st.divider()
 
-    # Inputs
+    # User Inputs
     col1, col2 = st.columns(2)
     with col1:
         commodity = st.selectbox(
@@ -31,10 +31,13 @@ def show():
             ]
         )
 
+    # Action Trigger
     if st.button("🔍 Run Market Suitability Analysis", type="primary"):
         st.divider()
         
-        # 1. Strategic Decision-Support Layer v1.0
+        # ----------------------------------------------------
+        # STRATEGIC DECISION-SUPPORT LAYER V1.0
+        # ----------------------------------------------------
         st.subheader("💡 Strategic Decision-Support Layer v1.0")
         
         m1, m2, m3 = st.columns(3)
@@ -42,7 +45,7 @@ def show():
         m2.metric("Applied Tariff Rate", "0.0%", delta="Preferential / FTA")
         m3.metric("Supply Chain Risk", "8.0%", delta="Low Risk", delta_color="inverse")
 
-        # 2. Agentic Strategy Recommendation Block
+        # AGENTIC STRATEGY RECOMMENDATION
         st.info(
             f"🤖 **Agentic Strategy Recommendation**\n\n"
             f"**SIGNAL: STABLE EXPANSION.** Recommend 40ft Reefer FCL volume for **{commodity.split('-')[1].strip()}** to **{target_market}**. "
@@ -51,7 +54,9 @@ def show():
 
         st.divider()
 
-        # 3. TIPP Compliance Checklist
+        # ----------------------------------------------------
+        # TIPP COMPLIANCE CHECKLIST
+        # ----------------------------------------------------
         st.subheader("📋 TIPP Export Compliance Checklist")
         data = {
             "Requirement / Document": [
